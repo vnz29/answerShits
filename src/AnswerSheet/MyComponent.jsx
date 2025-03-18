@@ -171,9 +171,9 @@ const MyComponent = () => {
         {finalResult ? (
           <div className="text-center">{`You got ${
             correctAnswers.length
-          } out of 75, and your percentage is ${
-            Math.round(parseInt(correctAnswers.length) / 85) * 100
-          }%.`}</div>
+          } out of 85, and your percentage is ${Math.ceil(
+            (parseInt(correctAnswers.length) / 85) * 100
+          )}%.`}</div>
         ) : (
           <div>
             <Form onSubmit={handleSubmit}>
@@ -210,14 +210,14 @@ const MyComponent = () => {
           </p>
           <div className="text-center">
             <Button
-              className="ml-3"
+              className="ml-1"
               variant="primary"
               onClick={() => {
                 setIsCorrectModalOpen(true);
               }}
             >{`Correct Answers ${correctAnswers.length}`}</Button>
             <Button
-              className="ms-2"
+              className="ms-1"
               variant="danger"
               onClick={() => {
                 setIsIncorrectModalOpen(true);
@@ -286,7 +286,6 @@ const MyComponent = () => {
         </Modal.Header>
         <Modal.Body>
           <div>
-            {console.log(correctAnswers)}
             {correctAnswers.length > 0 ? (
               correctAnswers.map((item, index) => (
                 <div key={index}>
