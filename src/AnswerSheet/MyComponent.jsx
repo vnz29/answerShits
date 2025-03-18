@@ -12,7 +12,7 @@ const [randomNumber, setRandomNumber] = useState(null);
   // Define the state to store the input value
 const [inputValue, setInputValue] = useState('');
 const answerLength = Object.keys(answerSheet).length;
-const [usedNumbers, setUsedNumbers] = useState(new Set());
+
 const [result, setResult] = useState([])
 
   useEffect(() =>{
@@ -20,29 +20,14 @@ const [result, setResult] = useState([])
   },[])
 
   const generateRandomNumber = () => {
-    // Create an array of numbers from 1 to 86 excluding 65
-    const availableNumbers = [];
-    for (let i = 1; i <= 86; i++) {
-      if (i !== 65 && !usedNumbers.has(i)) {
-        availableNumbers.push(i);
-      }
-    }
-console.log(availableNumbers)
-    // If all numbers have been used, stop the process
-    if (availableNumbers.length === 0) {
-      alert("No more numbers available!");
-      return;
-    }
-
-    // Select a random number from the remaining available numbers
-    const randomIndex = Math.floor(Math.random() * availableNumbers.length);
-    const number = availableNumbers[randomIndex];
-
-    // Mark the number as used and update the random number state
-    setUsedNumbers((prev) => new Set(prev).add(number));
-    setRandomNumber(number.toString()); // Convert the number to a string
+    let number;
+    do {
+      number = Math.floor(Math.random() * 86) + 1;
+    } while (number === 65);  // Ensure 65 is not selected
+    setRandomNumber(number);
   };
-  console.log(usedNumbers)
+
+
   const handleChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -55,7 +40,7 @@ console.log(availableNumbers)
       // Optionally, you can clear the input field after submission
       setInputValue('');
     };
-
+    console.log(randomNumber)
   return( 
   <div>
     <div style={{display:'flex', flexDirection:'column'}}>
