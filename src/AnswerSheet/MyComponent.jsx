@@ -74,6 +74,7 @@ const MyComponent = () => {
   const [incorrectAnswers, setIncorrectAnswers] = useState([]);
   const [isCorrectModalOpen, setIsCorrectModalOpen] = useState(false);
   const [isIncorrectModalOpen, setIsIncorrectModalOpen] = useState(false);
+  const [finalResult, setFinalResult] = useState(false);
   const generateRandomNumber = () => {
     let number;
     do {
@@ -84,7 +85,7 @@ const MyComponent = () => {
 
   useEffect(() => {
     generateRandomNumber();
-  }, [answeredQuestions]);
+  }, []);
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
@@ -135,7 +136,7 @@ const MyComponent = () => {
       answeredQuestions.length + 1 ===
       Object.keys(answerSheetData).length - 1
     ) {
-      alert("All questions have been answered!");
+      setFinalResult(true);
     } else {
       // Generate a new random number for the next question
       generateRandomNumber();
@@ -147,7 +148,7 @@ const MyComponent = () => {
   };
 
   return (
-    <>
+    <div className="my-4">
       <Container>
         <Tabs
           defaultActiveKey="image1"
@@ -166,46 +167,69 @@ const MyComponent = () => {
         </Tabs>
       </Container>
       <Container>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Row className="d-flex align-items-center">
-              <Col md={8}>
-                <Form.Label>{`What's the name of item #${randomNumber}?`}</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Type your answer"
-                  value={inputValue}
-                  onChange={handleChange}
-                />
-              </Col>
-              <Col md={4}>
-                <Button variant="success" type="submit" className="w-100">
-                  Submit
-                </Button>
-              </Col>
-            </Row>
-          </Form.Group>
-        </Form>
-        <p>You typed: {inputValue}</p>
-        <p>{result}</p> {/* Display result after submission */}
+        <p className="text-end mt-2">{answeredQuestions.length} out of 85</p>
+        {finalResult ? (
+          <div className="text-center">{`You got ${
+            correctAnswers.length
+          } out of 75, and your percentage is ${
+            Math.round(parseInt(correctAnswers.length) / 85) * 100
+          }%.`}</div>
+        ) : (
+          <div>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Row className="d-flex align-items-center">
+                  <Col md={8}>
+                    <Form.Label>{`What's the name of item #${randomNumber}?`}</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Type your answer"
+                      value={inputValue}
+                      onChange={handleChange}
+                    />
+                  </Col>
+                  <Col md={4} className="text-center mt-2">
+                    <Button
+                      variant="success"
+                      type="submit"
+                      className="text-center mt-1"
+                    >
+                      Submit
+                    </Button>
+                  </Col>
+                </Row>
+              </Form.Group>
+            </Form>
+            <p>{result}</p> {/* Display result after submission */}
+          </div>
+        )}
         <div>
-          <p> View Results :</p>
-          <Button
-            variant="primary"
-            onClick={() => {
-              setIsCorrectModalOpen(true);
-            }}
-          >{`Correct Answers ${correctAnswers.length}`}</Button>
-          <Button
-            variant="danger"
-            onClick={() => {
-              setIsIncorrectModalOpen(true);
-            }}
-          >{`Incorrect Answers ${incorrectAnswers.length} `}</Button>
+          <p>
+            {" "}
+            <b>View Results :</b>
+          </p>
+          <div className="text-center">
+            <Button
+              className="ml-3"
+              variant="primary"
+              onClick={() => {
+                setIsCorrectModalOpen(true);
+              }}
+            >{`Correct Answers ${correctAnswers.length}`}</Button>
+            <Button
+              className="ms-2"
+              variant="danger"
+              onClick={() => {
+                setIsIncorrectModalOpen(true);
+              }}
+            >{`Incorrect Answers ${incorrectAnswers.length} `}</Button>
+          </div>
         </div>
       </Container>
 
       <Modal
+        size="sm"
+        className="width"
         show={isIncorrectModalOpen}
         onHide={() => {
           setIsIncorrectModalOpen(!isIncorrectModalOpen);
@@ -221,10 +245,13 @@ const MyComponent = () => {
                 <div key={index}>
                   <p>
                     <b>Item #{item.randomNumber}: </b>
-                    {item.correctAnswer}
+                    <span style={{ color: "#198754" }}>
+                      {item.correctAnswer}
+                    </span>
                   </p>
                   <p>
-                    <b>Your answer:</b> {item.inputValue}
+                    <b>Your answer:</b>{" "}
+                    <span style={{ color: "#dc3545" }}>{item.inputValue}</span>
                   </p>
                 </div>
               ))
@@ -248,6 +275,7 @@ const MyComponent = () => {
       </Modal>
 
       <Modal
+        size="sm"
         show={isCorrectModalOpen}
         onHide={() => {
           setIsCorrectModalOpen(!isCorrectModalOpen);
@@ -289,7 +317,7 @@ const MyComponent = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </>
+    </div>
   );
 };
 
