@@ -163,10 +163,10 @@ const EngineComponent = () => {
           id="uncontrolled-tab-example"
           className="mb-3"
         >
-          <Tab eventKey="image1" title="engine1">
+          <Tab eventKey="engine1" title="engine1">
             <Image src={myimage1} fluid />
           </Tab>
-          <Tab eventKey="image2" title="engine2">
+          <Tab eventKey="engine2" title="engine2">
             <Image src={myimage2} fluid />
           </Tab>
         </Tabs>
