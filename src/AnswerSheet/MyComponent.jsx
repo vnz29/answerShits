@@ -181,7 +181,7 @@ const MyComponent = () => {
             <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Row className="d-flex align-items-center">
-                  <Col>
+                  <Col md={12}>
                     <Form.Label>{`What's the name of item #${randomNumber}?`}</Form.Label>
                     <Form.Control
                       type="text"
@@ -190,7 +190,7 @@ const MyComponent = () => {
                       onChange={handleChange}
                     />
                   </Col>
-                  <Col className="text-center mt-2">
+                  <Col md={12} className="text-center mt-2">
                     <Button
                       variant="success"
                       type="submit"
