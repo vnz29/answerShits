@@ -159,7 +159,7 @@ const EngineComponent = () => {
       </p>
       <Container>
         <Tabs
-          defaultActiveKey="image1"
+          defaultActiveKey="engine1"
           id="uncontrolled-tab-example"
           className="mb-3"
         >
