@@ -149,6 +149,8 @@ const MyComponent = () => {
 
   return (
     <div className="my-4">
+      <p>Common Tools</p>
+      <p>There is no item name for 65.</p>
       <Container>
         <Tabs
           defaultActiveKey="image1"

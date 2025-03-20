@@ -154,6 +154,9 @@ const EngineComponent = () => {
   return (
     <div className="my-4">
       <p>Engine Component</p>
+      <p>
+        There is no item name for 12, 14, 30, 33, 37, 38, 39, 43, 57, and 58.
+      </p>
       <Container>
         <Tabs
           defaultActiveKey="image1"
