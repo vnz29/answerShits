@@ -220,14 +220,14 @@ const EngineComponent = () => {
               onClick={() => {
                 setIsCorrectModalOpen(true);
               }}
-            >{`Correct Answers ${correctAnswers.length}`}</Button>
+            >{`Correct  ${correctAnswers.length}`}</Button>
             <Button
               className="ms-1"
               variant="danger"
               onClick={() => {
                 setIsIncorrectModalOpen(true);
               }}
-            >{`Incorrect Answers ${incorrectAnswers.length} `}</Button>
+            >{`Incorrect ${incorrectAnswers.length} `}</Button>
           </div>
         </div>
       </Container>
